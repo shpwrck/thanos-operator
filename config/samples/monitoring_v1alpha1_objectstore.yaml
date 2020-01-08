@@ -4,8 +4,10 @@ metadata:
   name: objectstore-sample
 spec:
   config:
-    value: my-objectstore-secret
+    valueFrom:
+      secretKeyRef:
+        name: my-objectstore-secret
   compactor:
-    enable: true
+    enabled: true
   bucketWeb:
-    enable: true
+    enabled: true
