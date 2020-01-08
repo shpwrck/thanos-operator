@@ -3,5 +3,9 @@ kind: ObjectStore
 metadata:
   name: objectstore-sample
 spec:
-  # Add fields here
-  foo: bar
+  config:
+    value: my-objectstore-secret
+  compactor:
+    enable: true
+  bucketWeb:
+    enable: true
