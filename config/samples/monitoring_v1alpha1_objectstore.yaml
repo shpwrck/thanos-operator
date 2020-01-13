@@ -7,6 +7,7 @@ spec:
     valueFrom:
       secretKeyRef:
         name: my-objectstore-secret
+        key: objectstore.yaml
   compactor:
     enabled: true
   bucketWeb:
