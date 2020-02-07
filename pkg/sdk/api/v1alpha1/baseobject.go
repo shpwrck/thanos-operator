@@ -20,12 +20,18 @@ package v1alpha1
 import corev1 "k8s.io/api/core/v1"
 
 type BaseObject struct {
-	Annotations  map[string]string           `json:"annotations,omitempty"`
-	Labels       map[string]string           `json:"labels,omitempty"`
-	Resources    corev1.ResourceRequirements `json:"resources,omitempty"`
-	Tolerations  []corev1.Toleration         `json:"tolerations,omitempty"`
-	NodeSelector map[string]string           `json:"nodeSelector,omitempty"`
-	Image        ImageSpec                   `json:"image,omitempty"`
+	// Resource annotations
+	Annotations map[string]string `json:"annotations,omitempty"`
+	// Resource labels
+	Labels map[string]string `json:"labels,omitempty"`
+	// Resource requests and limits
+	Resources corev1.ResourceRequirements `json:"resources,omitempty"`
+	// Resource toleration definition
+	Tolerations []corev1.Toleration `json:"tolerations,omitempty"`
+	// Resource node selector
+	NodeSelector map[string]string `json:"nodeSelector,omitempty"`
+	// Resource image spec
+	Image ImageSpec `json:"image,omitempty"`
 }
 
 type ImageSpec struct {

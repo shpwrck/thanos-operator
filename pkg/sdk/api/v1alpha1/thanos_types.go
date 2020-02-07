@@ -85,38 +85,59 @@ var DefaultRule = Rule{
 
 // ThanosSpec defines the desired state of Thanos
 type ThanosSpec struct {
-	QueryDiscovery                               bool          `json:"queryDiscovery,omitempty"`
-	StoreGateway                                 *StoreGateway `json:"storeGateway,omitempty"`
-	Rule                                         *Rule         `json:"rule,omitempty"`
-	Query                                        *Query        `json:"query,omitempty"`
-	EnableRecreateWorkloadOnImmutableFieldChange bool          `json:"enableRecreateWorkloadOnImmutableFieldChange,omitempty"`
+	// Discover queries from other Thanos resources
+	QueryDiscovery bool `json:"queryDiscovery,omitempty"`
+	// Store configuration for the Thanos stack
+	StoreGateway *StoreGateway `json:"storeGateway,omitempty"`
+	// Rule configuration for the Thanos stack
+	Rule *Rule `json:"rule,omitempty"`
+	// Query configuration for the Thanos stack
+	Query *Query `json:"query,omitempty"`
+	// This option handles the recreation of resource when hitting immutable fields
+	EnableRecreateWorkloadOnImmutableFieldChange bool `json:"enableRecreateWorkloadOnImmutableFieldChange,omitempty"`
 }
 
 // Metrics defines the service monitor endpoints
 type Metrics struct {
-	Interval              string `json:"interval,omitempty"`
-	Timeout               string `json:"timeout,omitempty"`
-	Port                  int32  `json:"port,omitempty"`
-	Path                  string `json:"path,omitempty"`
-	ServiceMonitor        bool   `json:"serviceMonitor,omitempty"`
-	PrometheusAnnotations bool   `json:"prometheusAnnotations,omitempty"`
+	// Prometheus scraping interval
+	Interval string `json:"interval,omitempty"`
+	// Prometheus scraping timeout
+	Timeout string `json:"timeout,omitempty"`
+	// Prometheus scraping port
+	Port int32 `json:"port,omitempty"`
+	// Prometheus scraping path
+	Path string `json:"path,omitempty"`
+	// When enabled creates ServiceMonitor object for Prometheus operator
+	ServiceMonitor bool `json:"serviceMonitor,omitempty"`
+	// When enabled creates annotate resources for Prometheus discovery
+	PrometheusAnnotations bool `json:"prometheusAnnotations,omitempty"`
 }
 
 type Ingress struct {
+	// TLS type secret reference
 	Certificate string `json:"certificate,omitempty"`
-	Host        string `json:"host,omitempty"`
-	Path        string `json:"path,omitempty"`
+	// Ingress host
+	Host string `json:"host,omitempty"`
+	// Ingress path
+	Path string `json:"path,omitempty"`
 }
 
 type Query struct {
-	BaseObject            `json:",inline"`
-	Metrics               *Metrics `json:"metrics,omitempty"`
-	HTTPIngress           *Ingress `json:"HTTPIngress,omitempty"`
-	GRPCIngress           *Ingress `json:"GRPCIngress,omitempty"`
-	GRPCClientCertificate string   `json:"GRPCClientCertificate,omitempty"`
-	GRPCServerCertificate string   `json:"GRPCServerCertificate,omitempty"`
-	LogLevel              string   `json:"logLevel,omitempty" thanos:"--log.level=%s"`
-	LogFormat             string   `json:"logFormat,omitempty" thanos:"--log.format=%s"`
+	BaseObject `json:",inline"`
+	// Metrics configuration for Prometheus scraping
+	Metrics *Metrics `json:"metrics,omitempty"`
+	// Ingress definition for HTTP listener
+	HTTPIngress *Ingress `json:"HTTPIngress,omitempty"`
+	// Ingress definition for GRPC listener
+	GRPCIngress *Ingress `json:"GRPCIngress,omitempty"`
+	// Client certificate for GRPC connection to Store API
+	GRPCClientCertificate string `json:"GRPCClientCertificate,omitempty"`
+	// Server certificate for GRPC listener
+	GRPCServerCertificate string `json:"GRPCServerCertificate,omitempty"`
+	// Log level fot stdout
+	LogLevel string `json:"logLevel,omitempty" thanos:"--log.level=%s"`
+	// Log format fot stdout
+	LogFormat string `json:"logFormat,omitempty" thanos:"--log.format=%s"`
 	// Listen host:port for HTTP endpoints.
 	HttpAddress string `json:"httpAddress,omitempty" thanos:"--http-address=%s"`
 	// Time to wait after an interrupt received for HTTP Server.
@@ -187,11 +208,15 @@ type TimeRange struct {
 }
 
 type StoreGateway struct {
-	BaseObject            `json:",inline"`
-	Metrics               *Metrics `json:"metrics,omitempty"`
-	GRPCServerCertificate string   `json:"GRPCServerCertificate,omitempty"`
-	LogLevel              string   `json:"logLevel,omitempty" thanos:"--log.level=%s"`
-	LogFormat             string   `json:"logFormat,omitempty" thanos:"--log.format=%s"`
+	BaseObject `json:",inline"`
+	// Metrics configuration for Prometheus scraping
+	Metrics *Metrics `json:"metrics,omitempty"`
+	// Server certificate for GRPC listener
+	GRPCServerCertificate string `json:"GRPCServerCertificate,omitempty"`
+	// Log level fot stdout
+	LogLevel string `json:"logLevel,omitempty" thanos:"--log.level=%s"`
+	// Log format fot stdout
+	LogFormat string `json:"logFormat,omitempty" thanos:"--log.format=%s"`
 	// Listen host:port for HTTP endpoints.
 	HttpAddress string `json:"httpAddress,omitempty" thanos:"--http-address=%s"`
 	// Time to wait after an interrupt received for HTTP Server.
@@ -219,12 +244,17 @@ type StoreGateway struct {
 }
 
 type Rule struct {
-	BaseObject  `json:",inline"`
-	Metrics     *Metrics `json:"metrics,omitempty"`
+	BaseObject `json:",inline"`
+	// Metrics configuration for Prometheus scraping
+	Metrics *Metrics `json:"metrics,omitempty"`
+	// Ingress definition for HTTP listener
 	HTTPIngress *Ingress `json:"HTTPIngress,omitempty"`
+	// Server certificate for GRPC listener
 	GRPCIngress *Ingress `json:"GRPCIngress,omitempty"`
-	LogLevel    string   `json:"logLevel,omitempty" thanos:"--log.level=%s"`
-	LogFormat   string   `json:"logFormat,omitempty" thanos:"--log.format=%s"`
+	// Log level fot stdout
+	LogLevel string `json:"logLevel,omitempty" thanos:"--log.level=%s"`
+	// Log format fot stdout
+	LogFormat string `json:"logFormat,omitempty" thanos:"--log.format=%s"`
 	// Listen host:port for HTTP endpoints.
 	HttpAddress string `json:"httpAddress,omitempty" thanos:"--http-address=%s"`
 	// Time to wait after an interrupt received for HTTP Server.

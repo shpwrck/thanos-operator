@@ -3,39 +3,39 @@
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| queryDiscovery | bool | No | - |  |
-| storeGateway | *StoreGateway | No | - |  |
-| rule | *Rule | No | - |  |
-| query | *Query | No | - |  |
-| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - |  |
+| queryDiscovery | bool | No | - | Discover queries from other Thanos resources<br> |
+| storeGateway | *StoreGateway | No | - | Store configuration for the Thanos stack<br> |
+| rule | *Rule | No | - | Rule configuration for the Thanos stack<br> |
+| query | *Query | No | - | Query configuration for the Thanos stack<br> |
+| enableRecreateWorkloadOnImmutableFieldChange | bool | No | - | This option handles the recreation of resource when hitting immutable fields<br> |
 ### Metrics
 #### Metrics defines the service monitor endpoints
 
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| interval | string | No | - |  |
-| timeout | string | No | - |  |
-| port | int32 | No | - |  |
-| path | string | No | - |  |
-| serviceMonitor | bool | No | - |  |
-| prometheusAnnotations | bool | No | - |  |
+| interval | string | No | - | Prometheus scraping interval<br> |
+| timeout | string | No | - | Prometheus scraping timeout<br> |
+| port | int32 | No | - | Prometheus scraping port<br> |
+| path | string | No | - | Prometheus scraping path<br> |
+| serviceMonitor | bool | No | - | When enabled creates ServiceMonitor object for Prometheus operator<br> |
+| prometheusAnnotations | bool | No | - | When enabled creates annotate resources for Prometheus discovery<br> |
 ### Ingress
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
-| certificate | string | No | - |  |
-| host | string | No | - |  |
-| path | string | No | - |  |
+| certificate | string | No | - | TLS type secret reference<br> |
+| host | string | No | - | Ingress host<br> |
+| path | string | No | - | Ingress path<br> |
 ### Query
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 |  | BaseObject | Yes | - |  |
-| metrics | *Metrics | No | - |  |
-| HTTPIngress | *Ingress | No | - |  |
-| GRPCIngress | *Ingress | No | - |  |
-| GRPCClientCertificate | string | No | - |  |
-| GRPCServerCertificate | string | No | - |  |
-| logLevel | string | No | - |  |
-| logFormat | string | No | - |  |
+| metrics | *Metrics | No | - | Metrics configuration for Prometheus scraping<br> |
+| HTTPIngress | *Ingress | No | - | Ingress definition for HTTP listener<br> |
+| GRPCIngress | *Ingress | No | - | Ingress definition for GRPC listener<br> |
+| GRPCClientCertificate | string | No | - | Client certificate for GRPC connection to Store API<br> |
+| GRPCServerCertificate | string | No | - | Server certificate for GRPC listener<br> |
+| logLevel | string | No | - | Log level fot stdout<br> |
+| logFormat | string | No | - | Log format fot stdout<br> |
 | httpAddress | string | No | - | Listen host:port for HTTP endpoints.<br> |
 | http_grace_period | string | No | - | Time to wait after an interrupt received for HTTP Server.<br> |
 | grpcAddress | string | No | - | Listen ip:port address for gRPC endpoints<br> |
@@ -67,10 +67,10 @@
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 |  | BaseObject | Yes | - |  |
-| metrics | *Metrics | No | - |  |
-| GRPCServerCertificate | string | No | - |  |
-| logLevel | string | No | - |  |
-| logFormat | string | No | - |  |
+| metrics | *Metrics | No | - | Metrics configuration for Prometheus scraping<br> |
+| GRPCServerCertificate | string | No | - | Server certificate for GRPC listener<br> |
+| logLevel | string | No | - | Log level fot stdout<br> |
+| logFormat | string | No | - | Log format fot stdout<br> |
 | httpAddress | string | No | - | Listen host:port for HTTP endpoints.<br> |
 | http_grace_period | string | No | - | Time to wait after an interrupt received for HTTP Server.<br> |
 | grpcAddress | string | No | - | Listen ip:port address for gRPC endpoints<br> |
@@ -86,11 +86,11 @@
 | Variable Name | Type | Required | Default | Description |
 |---|---|---|---|---|
 |  | BaseObject | Yes | - |  |
-| metrics | *Metrics | No | - |  |
-| HTTPIngress | *Ingress | No | - |  |
-| GRPCIngress | *Ingress | No | - |  |
-| logLevel | string | No | - |  |
-| logFormat | string | No | - |  |
+| metrics | *Metrics | No | - | Metrics configuration for Prometheus scraping<br> |
+| HTTPIngress | *Ingress | No | - | Ingress definition for HTTP listener<br> |
+| GRPCIngress | *Ingress | No | - | Server certificate for GRPC listener<br> |
+| logLevel | string | No | - | Log level fot stdout<br> |
+| logFormat | string | No | - | Log format fot stdout<br> |
 | httpAddress | string | No | - | Listen host:port for HTTP endpoints.<br> |
 | http_grace_period | string | No | - | Time to wait after an interrupt received for HTTP Server.<br> |
 | dataDir | string | No | - | Data directory.<br> |
